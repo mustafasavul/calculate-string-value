@@ -1,0 +1,39 @@
+.result {
+  background-color: #f2f2f2;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.calc-input-container {
+  width: 50%;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  border: 1px solid #ccc;
+  height: 30px;
+  overflow: hidden;
+}
+
+.calc-input-container.focus {
+  border: 1px solid #0072f5;
+}
+
+.calc-input-container input {
+  width: 75%;
+  border: 0;
+  height: 30px;
+  border: none;
+  outline: none;
+}
+
+.calc-input-result {
+  width: 25%;
+  height: 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #000;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
