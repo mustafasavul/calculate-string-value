@@ -14,12 +14,12 @@
   overflow: hidden;
 }
 
-.calc-input-container.focus {
-  border: 1px solid #0072f5;
+.calc-input-container label {
+  display: none;
 }
 
 .calc-input-container input {
-  width: 75%;
+  width: 70%;
   border: 0;
   height: 30px;
   border: none;
@@ -27,7 +27,7 @@
 }
 
 .calc-input-result {
-  width: 25%;
+  width: 30%;
   height: 30px;
   font-size: 1rem;
   font-weight: bold;
@@ -36,4 +36,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.invalid {
+  border: 1px solid #f00;
 }

@@ -1,40 +1,68 @@
-import { arithmeticStringConvert } from './utils';
+import "./style.css";
 
 export default class NumericInput {
-  elId: string;
-  type: string;
-  className: string;
   arithmeticStringConvert: any;
+  className: string;
+  elId: string;
+  id: string;
+  type: string;
   value: string;
-  result: string
 
-  constructor(elId: string, result: string, type: string, className: string, value: string) {
-    this.elId = elId;
-    this.type = type;
+  constructor(elId: string, id: string, type: string, className: string, value: string) {
     this.className = className;
+    this.elId = elId;
+    this.id = id;
+    this.type = type;
     this.value = value;
-    this.result = result;
+    this.createInput();
   }
 
   createInput() {
     const hostEl = document.getElementById(this.elId);
-    const calcResult = document.getElementById(this.result);
 
+    const numericInputContainer = document.createElement("div");
+    const numericInputResult = document.createElement("div");
     const numericInput = document.createElement("input");
+    const numericInputLabel = document.createElement("label");
+
+    numericInputContainer.classList.add('calc-input-container');
+    numericInputResult.classList.add('calc-input-result');
 
     numericInput.setAttribute('type', this.type);
     numericInput.setAttribute('value', this.value);
     numericInput.setAttribute('class', this.className);
-    numericInput.setAttribute('id', this.elId);
+    numericInput.setAttribute('id', this.id);
+    numericInputLabel.setAttribute('for', this.id);
+    numericInputResult.setAttribute('id', 'calcResult');
 
-    hostEl?.append(numericInput);
+    numericInputContainer.append(numericInput, numericInputLabel, numericInputResult);
+
+    hostEl?.append(numericInputContainer);
+
+    numericInputLabel.innerHTML = 'Result:';
+
+    const regAlphabet = /^[a-z]+$/i;
 
     numericInput.addEventListener('input', event => {
       const target = event.target as HTMLInputElement;
       const value = target.value;
 
-      calcResult.innerHTML = arithmeticStringConvert(value);
-    })
+      if (value == '' || regAlphabet.test(value)) {
+        numericInputResult.innerHTML = '?';
+        numericInputContainer.classList.add('invalid');
+        return false;
+      } else {
+        numericInputContainer.classList.remove('invalid');
+      }
 
+      numericInputResult.innerHTML = arithmeticStringConvert(value);
+    })
   }
 }
+
+/**
+ * Arithmetic string convert
+ */
+const arithmeticStringConvert = (fn: any) => {
+  return new Function("return " + fn)();
+};
